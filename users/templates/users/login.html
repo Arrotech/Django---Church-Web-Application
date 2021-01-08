@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="register-container">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend>Join Us</legend>
+            {{ form.as_p }}
+        </fieldset>
+        <div class="form-group">
+            <small>
+                Forgot password? <a class="login-link" href="{% url 'password_reset' %}">Reset Password</a>
+            </small>
+        </div>
+        <div class="form-group">
+            <button class="btn" type="submit">Sign In</button>
+        </div>
+    </form>
+    <div class="login">
+        <small>
+            Need an account? <a class="login-link" href="{% url 'users-register' %}">Sign Up</a>
+        </small>
+    </div>
+</div>
+{% endblock content %}

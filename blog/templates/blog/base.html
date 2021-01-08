@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <title>Eternity Church</title>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav-left">
+            <a class="nav-links logo-name" href="{% url 'blog-home' %}">E<span class="eternity-cross">✝</span>ERNITY</a>
+        </div>
+        <div class="nav-right">
+            <a class="nav-links" href="{% url 'blog-home' %}">Articles</a>
+            {% if user.is_authenticated %}
+            <a class="nav-links" href="{% url 'post-create' %}">Add Post</a>
+            <a class="nav-links" href="{% url 'profile' %}">Profile</a>
+            <a class="nav-links" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a class="nav-links" href="{% url 'login' %}">Login</a>
+            <a class="nav-links" href="{% url 'users-register' %}">Register</a>
+            {% endif %}
+        </div>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    <!-- <div class="footer">
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>ABOUT</h3>
+                <p>Leadership</p>
+                <p>Members</p>
+                <p>Achievements</p>
+                <p>Responsibilities</p>
+            </div>
+            <div class="footer-news">
+                <h3>NEWS</h3>
+                <p>Past Events</p>
+                <p>Upcoming Events</p>
+            </div>
+            <div class="footer-account">
+                <h3>ACCOUNTS</h3>
+                <p>Login</p>
+                <p>Register</p>
+                <p>Staff</p>
+                <p>Members</p>
+            </div>
+            <div class="footer-contact">
+                <h3>CONTACT</h3>
+                <p>Email: eternity@gmail.com</p>
+                <p>Phone: +254 720 930 988</p>
+            </div>
+        </div>
+    </div> -->
+</body>
+
+</html>

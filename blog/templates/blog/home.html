@@ -1,0 +1,70 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="main-content">
+    <div class="content-left"></div>
+    <div class="content-center">
+        {% for post in posts %}
+        <div class="post_container">
+            <img class="profile_image" src="{{ post.author.profile.image.url }}" alt="Profile Picture" />
+            <div class="post_content">
+                <div class="post_header">
+                    <p class=""><a class="link post_username" href="{% url 'user-posts' post.author.username %}">@{{ post.author }}</a></p>
+                    <p class="post_date">{{ post.date_posted }}</p>
+                </div>
+                <h1><a class="link" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h1>
+                <p>{{ post.content }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="pagination">
+            {% if is_paginated %}
+            {% if page_obj.has_previous %}
+            <a class="paginator-outline-info paginator-header" href="?page=1">First</a>
+            <a class="paginator-outline-info" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <a class="paginator-info" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a
+                class="paginator-outline-info" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a class="paginator-outline-info" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="paginator-outline-info paginator-header"
+                    href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                {% endif %}
+
+                {% endif %}
+        </div>
+    </div>
+    <div class="content-right">
+        <div class="sidebar-search">
+            <input type="text" placeholder="Search Authors, Posts">
+        </div>
+        <div class="recent-posts">
+            <h4>RECENT POSTS</h4>
+            <ul class="recent-posts-list">
+                <li>Blog 1 by <span class="post_username">Kamcho</span></li>
+                <li>Blog 2 by <span class="post_username">Arrotech</span></li>
+                <li>Blog 3 by <span class="post_username">Marsha</span></li>
+                <li>Blog 4 by <span class="post_username">Kamcho</span></li>
+                <li>Blog 5 by <span class="post_username">Kamcho</span></li>
+            </ul>
+        </div>
+        <div class="recent-posts">
+            <h4>AUTHORS</h4>
+            <ul class="recent-posts-list">
+                <li><span class="post_username">Kamcho</span></li>
+                <li><span class="post_username">Arrotech</span></li>
+                <li><span class="post_username">Marsha</span></li>
+                <li><span class="post_username">Peter</span></li>
+                <li><span class="post_username">Kevin</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

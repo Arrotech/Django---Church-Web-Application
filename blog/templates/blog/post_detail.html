@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="post_container">
+    <img class="profile_image" src="{{ user.profile.image.url }}" alt="Profile Picture" />
+    <div class="post_content">
+        <div class="post_header">
+            <p class=""><a class="link post_username" href="{% url 'user-posts' object.author.username %}">@{{ post.author }}</a></p>
+            <p class="post_date">{{ object.date_posted }}</p>
+
+        </div>
+        <h1>{{ object.title }}</h1>
+        <p>{{ object.content }}</p>
+        <div class="post-actions">
+            {% if object.author == user %}
+            <a class="login-link cancel-link" href="{% url 'post-update' object.id %}">Update</a>
+            <a class="login-link" href="{% url 'post-delete' object.id %}">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
