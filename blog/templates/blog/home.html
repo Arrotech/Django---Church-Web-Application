@@ -2,11 +2,24 @@
 
 {% block content %}
 <div class="main-content">
-    <div class="content-left"></div>
+    <div class="content-left">
+        <img class="" src="static/blog/default.jpg" alt="Profile Picture" />
+        <div class="personal-details">
+            <p class="profile_name">Harun Gachanja Gitundu</p><br>
+            <p class="profile_username">{{ user.username }}</p>
+        </div>
+        <div class="personal-details-list">
+            <hr>
+            <h4>Contact</h4>
+            <p>+254711371265</p>
+            <p>{{ user.email }}</p>
+            <hr>
+        </div>
+    </div>
     <div class="content-center">
         {% for post in posts %}
         <div class="post_container">
-            <img class="profile_image" src="{{ post.author.profile.image.url }}" alt="Profile Picture" />
+            <img class="profile_image" src="{{ post.author.profile.image.url }}" />
             <div class="post_content">
                 <div class="post_header">
                     <p class=""><a class="link post_username" href="{% url 'user-posts' post.author.username %}">@{{ post.author }}</a></p>
